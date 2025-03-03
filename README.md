@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Proxy Server for Fetching RSS Feeds
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project sets up a simple proxy server using **Express**, **Node-Fetch**, and **CORS** to bypass CORS restrictions when fetching RSS feeds.
 
-## Available Scripts
+## 📌 Installation
 
-In the project directory, you can run:
+Run the following command to install the required dependencies:
+```sh
+npm install express node-fetch cors
+```
 
-### `npm start`
+## 🚀 Setting Up the Server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Create a file named `server.js` and paste the following code:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```js
+import express from "express";
+import fetch from "node-fetch";
+import cors from "cors";
 
-### `npm test`
+const app = express();
+app.use(cors()); // Enable CORS for all origins
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+app.get("/proxy", async (req, res) => {
+  const url = req.query.url;
+  if (!url) {
+    return res.status(400).send("Missing URL parameter");
+  }
 
-### `npm run build`
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0", // Mimic a browser request
+        "Accept": "application/rss+xml, application/xml, text/xml"
+      }
+    });
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    if (!response.ok) {
+      throw new Error(`Server Error (${response.status}): ${response.statusText}`);
+    }
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    const text = await response.text();
+    res.set("Content-Type", "application/xml"); // Set RSS format
+    res.send(text);
+  } catch (err) {
+    res.status(500).send("Error fetching RSS: " + err.message);
+  }
+});
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+app.listen(5000, () => console.log("✅ Proxy server running on port 5000"));
+```
 
-### `npm run eject`
+## 🏃 Running the Server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Start the proxy server with:
+```sh
+node server.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The server will be running on:
+```
+http://localhost:5000/proxy?url=YOUR_RSS_FEED_URL
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📡 Example Request
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To fetch an RSS feed, make a request like this:
+```
+http://localhost:5000/proxy?url=https://feeds.soundcloud.com/users/soundcloud:users:256509984/sounds.rss
+```
 
-## Learn More
+## 🔧 Troubleshooting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Ensure **Node.js** is installed.
+- If you get a CORS error, confirm that the proxy is running on port **5000**.
+- Check the server logs for detailed errors.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📜 License
+This project is open-source and free to use.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Enjoy coding! 🚀
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
