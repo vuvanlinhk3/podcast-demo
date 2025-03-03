@@ -1,0 +1,112 @@
+/* Podcast Detail Styles */
+.podcast-detail {
+  margin: 40px auto;
+  padding: 20px;
+  background: #1e1e1e;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.detail-header {
+  display: flex;
+  gap: 20px;
+}
+
+.detail-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.detail-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.podcast-author {
+  font-size: 16px;
+  color: #aaa;
+}
+
+.podcast-description {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  background: #6200ea;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #3700b3;
+}
+
+.episodes-list {
+  margin-top: 30px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.episode-item {
+  display: flex;
+  gap: 15px;
+  background: #292929;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.episode-item:hover {
+  background: #373737;
+}
+
+.episode-item.playing {
+  border: 2px solid #6200ea;
+}
+
+.episode-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.episode-info h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.episode-description {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.episode-duration {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}

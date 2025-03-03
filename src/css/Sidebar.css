@@ -1,0 +1,124 @@
+/* Sidebar.css */
+
+/* Sidebar Container */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #ffffff; /* Nền trắng tinh khôi */
+  color: #2c3e50; /* Màu chữ xanh đậm nhạt */
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.05); /* Shadow nhẹ */
+  border-right: 1px solid #e9ecef; /* Viền nhẹ sáng */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0984e3; /* Màu xanh dương tươi sáng cho logo */
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #0652dd; /* Đậm hơn khi hover */
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-item:hover {
+  background: #f1f3f5; /* Nền xám nhạt khi hover */
+  color: #0984e3; /* Màu xanh dương khi hover */
+  transform: translateX(5px); /* Dịch nhẹ sang phải */
+}
+
+/* Icon */
+.icon {
+  font-size: 24px;
+  color: #636e72; /* Màu xám đậm nhạt cho icon */
+  transition: color 0.3s ease;
+}
+
+.menu-item:hover .icon {
+  color: #0984e3; /* Đồng bộ màu với text khi hover */
+}
+
+/* Active State (nếu muốn highlight mục đang chọn) */
+.menu-item.active {
+  background: #e9ecef;
+  color: #0984e3;
+  font-weight: 600;
+}
+
+.menu-item.active .icon {
+  color: #0984e3;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 2000;
+    transform: translateX(-100%);
+    border-right: none;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .menu-item {
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+}
+
+/* Animation */
+.sidebar {
+  animation: slideInLeft 0.5s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

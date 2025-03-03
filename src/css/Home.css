@@ -1,0 +1,147 @@
+/* Home.css */
+.home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  margin: 0 auto 100px auto;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.category-section h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  border-left: 4px solid #007aff;
+}
+
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.podcast-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.podcast-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.podcast-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.podcast-image:hover {
+  opacity: 0.9;
+}
+
+.podcast-info {
+  padding: 15px;
+}
+
+.podcast-link {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #007aff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.podcast-link:hover {
+  color: #005bb5;
+}
+
+.podcast-info p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
+.play-btn {
+  background: #007aff;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.play-btn:hover {
+  background: #005bb5;
+  transform: scale(1.05);
+}
+
+.play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.podcast-card {
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .podcast-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .podcast-image {
+    height: 150px;
+  }
+}

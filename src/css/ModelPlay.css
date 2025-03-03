@@ -1,0 +1,302 @@
+/* ModelPlay.css */
+.audio-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); /* Gradient sáng nhẹ */
+  color: #2c3e50; /* Màu chữ xanh đậm nhạt */
+  padding: 15px 20px;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.05); /* Shadow nhẹ */
+  border-top: 1px solid #e0e0e0; /* Viền trên sáng */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.audio-player.hidden {
+  transform: translateY(100%);
+}
+
+/* Info Podcast */
+.info-pod {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.player-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.player-image:hover {
+  transform: scale(1.1);
+}
+
+.player-info {
+  flex-grow: 1;
+}
+
+.player-info h3 {
+  font-size: 1.2rem;
+  margin: 0 0 5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2c3e50; /* Đồng bộ màu chữ */
+}
+
+/* Progress Bar */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #636e72; /* Màu xám nhạt cho thời gian */
+}
+
+.progress-container {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: #dfe4ea; /* Nền sáng cho thanh tiến trình */
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-range {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.progress-bar-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #0984e3; /* Màu xanh dương thay cho cam */
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.buffered-bar {
+  position: absolute;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Màu xám nhạt cho phần đã buffer */
+  transition: width 0.2s ease-in-out;
+}
+
+.played-bar {
+  position: absolute;
+  height: 100%;
+  background: #0984e3; /* Màu xanh dương cho phần đã phát */
+  transition: width 0.2s linear;
+}
+
+/* Audio Controls */
+.audio-controls {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.audio-controls .MuiSvgIcon-root {
+  font-size: 32px;
+  color: #636e72; /* Màu xám nhạt cho icon */
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.audio-controls .MuiSvgIcon-root:hover {
+  color: #0984e3; /* Màu xanh dương khi hover */
+  transform: scale(1.1);
+}
+
+/* Volume Control */
+.control-volume {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-control .MuiSvgIcon-root {
+  font-size: 28px;
+  color: #636e72; /* Màu xám nhạt */
+  transition: color 0.3s ease;
+}
+
+.volume-control .MuiSvgIcon-root:hover {
+  color: #0984e3; /* Màu xanh dương khi hover */
+}
+
+.volume-control input {
+  width: 100px;
+  -webkit-appearance: none;
+  height: 4px;
+  background: #dfe4ea; /* Nền sáng cho thanh âm lượng */
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-control input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #0984e3; /* Màu xanh dương */
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Fullscreen */
+.fullscreen .MuiSvgIcon-root {
+  font-size: 28px;
+  color: #636e72;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.fullscreen .MuiSvgIcon-root:hover {
+  color: #0984e3;
+  transform: scale(1.1);
+}
+
+/* Download Section */
+.download-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.download-icon {
+  color: #636e72;
+  font-size: 28px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.download-icon:hover {
+  color: #0984e3;
+  transform: scale(1.1);
+}
+
+.download-options {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background: #ffffff; /* Nền trắng cho tùy chọn tải */
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow nhẹ */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.download-section.active .download-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  color: #2c3e50; /* Màu chữ tối */
+}
+
+.download-btn {
+  background: #0984e3; /* Màu xanh dương thay cho cam */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #0652dd; /* Đậm hơn khi hover */
+  transform: scale(1.05);
+}
+
+.download-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animation */
+.audio-player {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .info-pod {
+    width: 35%;
+  }
+
+  .audio-controls {
+    width: 35%;
+  }
+
+  .control-volume {
+    width: 30%;
+  }
+
+  .player-info h3 {
+    font-size: 1rem;
+  }
+
+  .volume-control input {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-pod {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .audio-controls {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .control-volume {
+    display: none; /* Ẩn volume trên màn nhỏ */
+  }
+
+  .player-image {
+    width: 40px;
+    height: 40px;
+  }
+}

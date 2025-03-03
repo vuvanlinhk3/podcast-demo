@@ -1,0 +1,374 @@
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import podcastData from "../data/podcasts.json";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import "../App.css";
+import "../css/Home.css";
+import { Replay10, Forward10, Fullscreen, PlayArrow, Pause, VolumeUp, VolumeDown, VolumeOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+function Home() {
+  const audioRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const navigate = useNavigate();
+  const [currentPodcast, setCurrentPodcast] = useState(null);
+  const [currentEpisodes, setCurrentEpisodes] = useState([]);
+  const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+
+  // useEffect(() => {
+  //   if (audioRef.current) {
+  //     const audio = audioRef.current;
+  //     audio.addEventListener("timeupdate", () => setCurrentTime(audio.currentTime));
+  //     audio.addEventListener("loadedmetadata", () => setDuration(audio.duration));
+  //   }
+  // }, [currentEpisodeIndex]);
+
+
+
+  useEffect(() => {
+    const audio = audioRef.current; // Lưu ref vào biến cục bộ
+    if (!audio) return;
+  
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const setAudioData = () => setDuration(audio.duration);
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+  
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", setAudioData);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+  
+    return () => {
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", setAudioData);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+    };
+  }, []);
+  
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+  
+    if (audioRef.current.paused) {
+      audioRef.current.play()
+        .then(() => setIsPlaying(true)) 
+        .catch(() => setIsPlaying(false)); 
+    } else {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+  
+
+
+
+// const handlePlayPodcast = (podcast) => {
+//   setCurrentPodcast(podcast);
+//   setCurrentEpisodes(podcast.episodes);
+//   setCurrentEpisodeIndex(0);
+
+//   if (audioRef.current) {
+//     audioRef.current.src = podcast.episodes[0].audio;
+//     audioRef.current
+//       .play()
+//       .then(() => setIsPlaying(true)) 
+//       .catch(() => setIsPlaying(false)); 
+//   }
+// };
+
+
+const handlePlayPodcast = (podcast) => {
+  // Nếu podcast hiện tại đang phát, không làm gì cả
+  if (currentPodcast?.id === podcast.id) return;
+
+  // Nếu chọn podcast mới, cập nhật state và phát từ đầu
+  setCurrentPodcast(podcast);
+  setCurrentEpisodes(podcast.episodes);
+  setCurrentEpisodeIndex(0);
+
+  // Chờ state cập nhật, sau đó thiết lập lại src và phát nhạc
+  setTimeout(() => {
+    if (audioRef.current) {
+      audioRef.current.src = podcast.episodes[0].audio;
+      audioRef.current.load();
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    }
+  }, 10);
+};
+
+
+
+
+// // Xác định icon phù hợp với mức âm lượng
+// const getVolumeIcon = () => {
+//   if (volume === 0) return <VolumeOff />;
+//   if (volume <= 0.5) return <VolumeDown />;
+//   return <VolumeUp />;
+// };
+
+//   const handleVolumeChange = (e) => {
+//     const newVolume = parseFloat(e.target.value);
+//     setVolume(newVolume);
+//     if (audioRef.current) {
+//       audioRef.current.volume = newVolume;
+//     }
+//   };
+
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    
+    // Cập nhật thời gian hiện tại khi bài nhạc phát
+    const updateTime = () => setCurrentTime(audio.currentTime);
+
+    // Lấy tổng thời gian khi tải xong file âm thanh
+    const setAudioData = () => setDuration(audio.duration);
+
+    if (audio) {
+      audio.addEventListener("timeupdate", updateTime);
+      audio.addEventListener("loadedmetadata", setAudioData);
+    }
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener("timeupdate", updateTime);
+        audio.removeEventListener("loadedmetadata", setAudioData);
+      }
+    };
+  }, []);
+
+  // const handleSeek = (e) => {
+  //   const newTime = parseFloat(e.target.value);
+  //   setCurrentTime(newTime);
+  //   if (audioRef.current) {
+  //     audioRef.current.currentTime = newTime;
+  //   }
+  // };
+
+
+  
+
+
+
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const setAudioData = () => setDuration(audio.duration);
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", setAudioData);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+
+    return () => {
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", setAudioData);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+    };
+  }, []);
+
+  const handleSeek = (e) => {
+    const newTime = parseFloat(e.target.value);
+    setCurrentTime(newTime);
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+    }
+  };
+
+  // const togglePlay = () => {
+  //   if (audioRef.current) {
+  //     if (isPlaying) {
+  //       audioRef.current.pause();
+  //     } else {
+  //       audioRef.current.play();
+  //     }
+  //   }
+  // };
+
+  const skipTime = (seconds) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime += seconds;
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
+  const getVolumeIcon = () => {
+    if (volume === 0) return <VolumeOff />;
+    if (volume < 0.5) return <VolumeDown />;
+    return <VolumeUp />;
+  };
+
+  // // ✅ Định nghĩa handlePlayPodcast nếu cần
+  // const handlePlayPodcast = (episodeIndex) => {
+  //   setCurrentEpisodeIndex(episodeIndex);
+  //   if (audioRef.current) {
+  //     audioRef.current.play();
+  //     setIsPlaying(true);
+  //   }
+  // };
+
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs.toString().padStart(2, "0")}`;
+  };
+
+
+
+
+  return (
+    <div className="home-container">
+      <h2 className="home-title">🎙 Apple Style Podcast</h2>
+      <div className="category-list">
+        {podcastData.map((category) => (
+          <div key={category.genre} className="category-section">
+            <h3>{category.genre}</h3>
+            <div className="podcast-grid">
+              {category.podcasts.map((podcast) => (
+                <div key={podcast.id} className="podcast-card">
+                  <img  onClick={() => navigate(`/podcast/${podcast.id}`)} src={podcast.image} alt={podcast.title} className="podcast-image" />
+                  <div className="podcast-info">
+                    <Link to={`/podcast/${podcast.id}`} className="podcast-link">
+                      {podcast.title}
+                    </Link>
+                    <p  onClick={() => navigate(`/podcast/${podcast.id}`)}>{podcast.description}</p>
+                    <button onClick={() => handlePlayPodcast(podcast)} className="play-btn">
+                      ▶ Phát
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Thanh phát nhạc */}
+{currentPodcast && currentEpisodes.length > 0 && (
+  <div className="audio-player">
+      
+    {/* Điều khiển phát nhạc */}
+    <div className="audio-controls">
+      <IconButton onClick={() => skipTime(-10)}>
+        <Replay10 />
+      </IconButton>
+      <IconButton onClick={togglePlay}>
+        {isPlaying ? <Pause /> : <PlayArrow />}
+      </IconButton>
+      <IconButton onClick={() => skipTime(10)}>
+        <Forward10 />
+      </IconButton>
+    </div>
+
+    <div className="info-pod">
+    <img src={currentPodcast.image} alt={currentPodcast.title} className="player-image" />
+    <div className="player-info">
+      <h3>{currentPodcast.title} - {currentEpisodes[currentEpisodeIndex]?.title}</h3>
+      <audio ref={audioRef} src={currentEpisodes[currentEpisodeIndex]?.audio} />
+      <div className="progress-bar">
+      <span>{formatTime(currentTime)}</span>
+        <input
+          type="range"
+          min="0"
+          max={duration || 0}
+          value={currentTime}
+          onChange={handleSeek}
+        />
+        <span>{formatTime(duration)}</span>
+      </div>
+    </div>
+    </div>
+
+    
+{/* bên phải */}
+    <div className="control-volume"> 
+      {/* volume-controlĐiều chỉnh âm lượng */}
+    <div className="volume-control">
+        <IconButton>{getVolumeIcon()}</IconButton>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.05"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+      </div>
+
+
+      {/* Mở modal toàn màn hình */}
+      <div className="fullscreen">
+        <IconButton onClick={() => setIsModalOpen(true)}>
+          <Fullscreen />
+        </IconButton>
+      </div>
+    </div>
+      
+  </div>
+)}
+
+
+      {/* Modal chi tiết */}
+      {isModalOpen && currentPodcast && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-left">
+              <h3>Danh sách phát</h3>
+              {currentEpisodes.map((episode, index) => (
+                <div
+                  key={index}
+                  className={`playlist-item ${index === currentEpisodeIndex ? "playing" : ""}`}
+                  onClick={() => setCurrentEpisodeIndex(index)}
+                >
+                  {episode.title}
+                </div>
+              ))}
+            </div>
+            <div className="modal-right">
+              <div className="modal-header">
+                <button className="close-btn" onClick={() => setIsModalOpen(false)}>✖</button>
+              </div>
+              <img src={currentPodcast.image} alt={currentPodcast.title} className="modal-image" />
+              <h3>{currentPodcast.title}</h3>
+              <p>{currentPodcast.description}</p>
+              <AudioPlayer
+                src={currentEpisodes[currentEpisodeIndex]?.audio}
+                autoPlay
+                controls
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Home;
