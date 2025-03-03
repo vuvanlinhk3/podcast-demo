@@ -18,7 +18,7 @@ const useAudioPlayer = (audioRef, currentPodcast, currentEpisodeIndex, qualityRe
         const episode = currentPodcast.episodes[currentEpisodeIndex];
         if (episode && episode.audio && isFromHome) {
           try {
-            const response = await fetch(`https://cors-anywhere.herokuapp.com/${episode.audio}`); // feedUrl
+            const response = await fetch(`http://localhost:5000/proxy?url=${encodeURIComponent(episode.audio)}`);
             const rssText = await response.text();
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(rssText, "text/xml");
