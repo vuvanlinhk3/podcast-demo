@@ -1,28 +1,62 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../App.css";
-import "../css/Search.css"
-import podcastData from "../data/podcasts.json";
+import "../css/Search.css";
 
 function Search() {
   const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Hàm chuẩn hóa chuỗi tìm kiếm: loại bỏ dấu, chuyển thường, bỏ khoảng trắng thừa
+  // Hàm chuẩn hóa chuỗi tìm kiếm
   const normalizeString = (str) => {
     return str
       .toLowerCase()
-      .normalize("NFD") // Chuẩn hóa Unicode để tách dấu
-      .replace(/[\u0300-\u036f]/g, "") // Xóa dấu
-      .replace(/\s+/g, " ") // Thay nhiều khoảng trắng bằng 1
-      .trim(); // Xóa khoảng trắng đầu/cuối
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
   };
 
-  // Lọc podcast dựa trên query đã chuẩn hóa
-  const filteredPodcasts = (podcastData || []).filter((podcast) => {
-    const normalizedTitle = normalizeString(podcast.title || "");
-    const normalizedQuery = normalizeString(query);
-    return normalizedTitle.includes(normalizedQuery);
-  });
+  // Debounce để trì hoãn tìm kiếm
+  useEffect(() => {
+    if (!query) {
+      setResults([]);
+      return;
+    }
+
+    const delayDebounce = setTimeout(() => {
+      fetchPodcasts();
+    }, 500); // Chờ 500ms trước khi gửi yêu cầu
+
+    return () => clearTimeout(delayDebounce); // Hủy nếu query thay đổi trước khi timeout
+  }, [query]);
+
+  // Hàm gọi API iTunes để tìm kiếm podcast
+  const fetchPodcasts = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(
+        `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=podcast&limit=20`
+      );
+      if (!response.ok) throw new Error("Không thể tìm kiếm podcast");
+      const data = await response.json();
+
+      const podcasts = data.results.map((podcast) => ({
+        id: podcast.collectionId,
+        title: podcast.collectionName,
+        author: podcast.artistName,
+        image: podcast.artworkUrl100,
+      }));
+
+      setResults(podcasts);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="search-container">
@@ -35,15 +69,21 @@ function Search() {
         className="search-input"
       />
       <div className="search-results">
-        {filteredPodcasts.length > 0 ? (
-          filteredPodcasts.map((podcast) => (
+        {loading && <p className="loading">Đang tìm kiếm...</p>}
+        {error && <p className="error">{error}</p>}
+        {!loading && !error && results.length > 0 ? (
+          results.map((podcast) => (
             <div key={podcast.id} className="podcast-item">
               <Link to={`/podcast/${podcast.id}`} className="podcast-link">
-                <h3>{podcast.title}</h3>
+                <img src={podcast.image} alt={podcast.title} className="podcast-thumbnail" />
+                <div className="podcast-info">
+                  <h3>{podcast.title}</h3>
+                  <p>{podcast.author}</p>
+                </div>
               </Link>
             </div>
           ))
-        ) : (
+        ) : !loading && !error && query && (
           <p className="no-results">Không tìm thấy podcast phù hợp.</p>
         )}
       </div>
