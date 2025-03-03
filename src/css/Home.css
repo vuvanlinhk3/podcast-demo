@@ -1,15 +1,15 @@
 /* Home.css */
-.home-container {
+/* .home-container {
   max-width: 1400px;
-  margin: 0 auto;
-  min-height: 100vh;
   margin: 0 auto 100px auto;
-}
+  min-height: 100vh;
+  padding: 20px;
+} */
 
 .home-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #2c3e50; /* Màu chữ đậm hài hòa */
   text-align: center;
   margin-bottom: 40px;
   animation: fadeInDown 1s ease-in-out;
@@ -18,85 +18,107 @@
 .category-list {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 50px;
+  padding-top: 2rem;
 }
 
 .category-section h3 {
   font-size: 1.8rem;
-  color: #333;
+  color: #34495e; /* Màu chữ nhẹ nhàng hơn */
   margin-bottom: 20px;
-  padding-left: 10px;
-  border-left: 4px solid #007aff;
+  padding-left: 12px;
+  border-left: 4px solid #3498db; /* Màu xanh dịu hơn */
 }
 
+/* Grid layout cho podcast */
 .podcast-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Tăng kích thước tối thiểu */
+  gap: 25px;
 }
 
+/* Card cố định kích thước */
 .podcast-card {
-  background: #fff;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bóng nhẹ hơn */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 280px; /* Chiều rộng cố định */
+  height: 380px; /* Chiều cao cố định */
+  display: flex;
+  flex-direction: column;
 }
 
 .podcast-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Hình ảnh cố định chiều cao */
 .podcast-image {
   width: 100%;
-  height: 200px;
+  height: 180px; /* Chiều cao hình ảnh cố định */
   object-fit: cover;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
 
 .podcast-image:hover {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
+/* Phần thông tin linh hoạt */
 .podcast-info {
   padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .podcast-link {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #007aff;
+  color: #3498db; /* Màu xanh dịu hơn */
   text-decoration: none;
   transition: color 0.3s ease;
+  white-space: nowrap; /* Không xuống dòng */
+  overflow: hidden; /* Ẩn phần thừa */
+  text-overflow: ellipsis; /* Thêm dấu ... */
 }
 
 .podcast-link:hover {
-  color: #005bb5;
+  color: #2980b9;
 }
 
 .podcast-info p {
   font-size: 0.9rem;
-  color: #666;
+  color: #7f8c8d; /* Màu xám nhẹ */
   margin: 10px 0;
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden; /* Ẩn phần thừa */
+  text-overflow: ellipsis; /* Thêm dấu ... */
 }
 
 .play-btn {
-  background: #007aff;
+  background: #3498db; /* Màu xanh dịu hơn */
   color: #fff;
   border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 8px 20px;
+  border-radius: 25px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
   transition: background 0.3s ease, transform 0.2s ease;
+  align-self: flex-start; /* Căn trái nút */
 }
 
 .play-btn:hover {
-  background: #005bb5;
+  background: #2980b9;
   transform: scale(1.05);
 }
 
@@ -138,10 +160,15 @@
   }
 
   .podcast-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .podcast-card {
+    width: 250px; /* Giảm chiều rộng trên mobile */
+    height: 340px; /* Giảm chiều cao trên mobile */
   }
 
   .podcast-image {
-    height: 150px;
+    height: 150px; /* Giảm chiều cao hình ảnh */
   }
 }

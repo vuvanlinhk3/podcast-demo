@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../css/Home.css";
+import Slide from "../components/slide";
 
 function Home({ handlePlayPodcast }) {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ function Home({ handlePlayPodcast }) {
 
   return (
     <div className="home-container">
-      <h2 className="home-title">🎙 Podcast</h2>
+      <Slide/>
       <div className="category-list">
         {podcasts.map((category) => (
           <div key={category.genre} className="category-section">

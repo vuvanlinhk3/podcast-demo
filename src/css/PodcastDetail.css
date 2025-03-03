@@ -1,112 +1,201 @@
 /* Podcast Detail Styles */
 .podcast-detail {
-  margin: 40px auto;
-  padding: 20px;
-  background: #1e1e1e;
-  color: #fff;
+  padding: 25px;
+  background: #f5f7fa; /* Nền sáng nhẹ */
+  color: #34495e; /* Màu chữ xanh xám đậm nhẹ */
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bóng nhẹ nhàng */
 }
 
 .detail-header {
   display: flex;
-  gap: 20px;
+  gap: 25px; /* Tăng khoảng cách */
+  align-items: flex-start;
 }
 
 .detail-image {
-  width: 200px;
-  height: 200px;
+  width: 220px; /* Tăng kích thước ảnh */
+  height: 220px;
   object-fit: cover;
   border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Thêm bóng nhẹ */
 }
 
 .detail-info h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 2rem; /* Tăng kích thước chữ */
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #2c3e50; /* Màu đậm hơn chút */
 }
 
 .podcast-author {
-  font-size: 16px;
-  color: #aaa;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #7f8c8d; /* Màu xám nhẹ */
+  margin-bottom: 10px;
 }
 
 .podcast-description {
-  font-size: 14px;
+  font-size: 0.95rem;
   line-height: 1.6;
-  margin: 10px 0;
+  color: #636e72; /* Xám nhạt đậm hơn chút */
+  margin: 0 0 15px 0;
 }
 
 .buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 15px; /* Tăng khoảng cách giữa các nút */
+  margin-top: 15px;
 }
 
 button {
-  background: #6200ea;
-  color: #fff;
+  background: #3498db; /* Màu xanh dịu */
+  color: #ffffff;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   gap: 8px;
-  border-radius: 8px;
+  border-radius: 25px; /* Bo tròn hơn */
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-  background: #3700b3;
+  background: #2980b9; /* Đậm hơn khi hover */
+  transform: scale(1.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+button:active {
+  transform: scale(0.95);
+}
+
+/* Episodes List */
 .episodes-list {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 1.6rem; /* Tăng kích thước chữ */
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  border-left: 4px solid #3498db; /* Thêm viền trái xanh */
 }
 
 .episode-item {
   display: flex;
-  gap: 15px;
-  background: #292929;
+  gap: 20px;
+  background: #ffffff; /* Nền trắng cho item */
   padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 120px; /* Chiều cao cố định */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Bóng nhẹ */
 }
 
 .episode-item:hover {
-  background: #373737;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .episode-item.playing {
-  border: 2px solid #6200ea;
+  border: 2px solid #3498db; /* Viền xanh khi đang phát */
+  background: #eef2f7; /* Nền nhạt hơn khi đang phát */
 }
 
 .episode-image {
-  width: 80px;
-  height: 80px;
+  width: 90px; /* Tăng kích thước ảnh */
+  height: 90px;
   border-radius: 8px;
   object-fit: cover;
+  flex-shrink: 0; /* Không co lại */
+}
+
+.episode-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden; /* Ẩn phần thừa */
 }
 
 .episode-info h4 {
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  white-space: nowrap; /* Không xuống dòng */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Thêm dấu ... khi dài */
 }
 
 .episode-description {
-  font-size: 14px;
-  color: #bbb;
+  font-size: 0.9rem;
+  color: #7f8c8d; /* Xám nhẹ */
+  margin-bottom: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Thêm dấu ... */
 }
 
 .episode-duration {
-  font-size: 12px;
-  color: #888;
-  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #95a5a6; /* Xám nhạt hơn */
+  margin-top: auto; /* Đẩy xuống dưới */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .detail-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .detail-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .detail-info h2 {
+    font-size: 1.8rem;
+  }
+
+  .episode-item {
+    height: 100px; /* Giảm chiều cao trên mobile */
+  }
+
+  .episode-image {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .podcast-detail {
+    padding: 15px;
+  }
+
+  .detail-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .detail-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

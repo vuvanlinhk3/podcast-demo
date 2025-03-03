@@ -28,6 +28,7 @@
   
   button {
     cursor: pointer;
+    color: #1e272e;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -106,6 +107,8 @@
     min-height: 100vh;
     overflow-y: auto;
     transition: margin-left 0.3s ease-in-out;
+  background: #f5f7fa; /* Màu nền sáng nhẹ nhàng */
+
   }
   
   body.light-theme .main-content {

@@ -1,0 +1,258 @@
+/* Slide.css */
+.slide {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Chiều cao cố định cho slide */
+  overflow: hidden;
+}
+
+.slide-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  filter: brightness(60%); /* Làm tối ảnh nền để chữ nổi bật */
+  transition: transform 0.5s ease; /* Hiệu ứng zoom nhẹ khi hover */
+}
+
+.slide-background:hover img {
+  transform: scale(1.05); /* Zoom nhẹ khi hover */
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffffff; /* Màu chữ trắng để nổi trên nền tối */
+  z-index: 2;
+}
+
+.slide-title {
+  font-size: 3rem; /* Kích thước chữ lớn */
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Bóng chữ để nổi bật */
+  animation: fadeInDown 1s ease-in-out; /* Hiệu ứng xuất hiện */
+}
+
+.slide-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 40px; /* Tăng khoảng cách để sóng nhạc không bị đè */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 1s ease-in-out 0.3s; /* Hiệu ứng trễ 0.3s */
+  animation-fill-mode: both; /* Giữ trạng thái cuối */
+}
+
+/* Wave Menu Styles */
+.wave-menu {
+  border: 3px solid #3498db; /* Màu xanh dịu đồng bộ với theme */
+  border-radius: 50px;
+  width: 220px; /* Tăng chiều rộng */
+  height: 50px; /* Tăng chiều cao */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto; /* Căn giữa */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1); /* Nền trắng trong suốt nhẹ */
+  backdrop-filter: blur(5px); /* Hiệu ứng mờ nền */
+  animation: fadeInUp 1s ease-in-out 0.6s; /* Hiệu ứng trễ giống nút cũ */
+  animation-fill-mode: both;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Thêm bóng */
+}
+
+.wave-menu:hover {
+  background: #3498db; /* Đổi nền khi hover */
+  border-color: #2980b9; /* Đậm hơn */
+  transform: scale(1.05); /* Phóng to nhẹ */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.wave-menu ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.wave-menu li {
+  height: 30px; /* Chiều cao sóng */
+  width: 5px; /* Độ rộng sóng */
+  border-radius: 10px;
+  background: #ffffff; /* Màu trắng cho sóng */
+  margin: 0 6px;
+  padding: 0;
+  animation-name: wave1;
+  animation-duration: 0.4s; /* Tăng thời gian cho mượt hơn */
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition: background 0.3s ease;
+}
+
+.wave-menu:hover li {
+  background: #ffffff; /* Giữ màu trắng khi hover */
+}
+
+/* Điều chỉnh hiệu ứng sóng cho từng thanh */
+.wave-menu li:nth-child(2) {
+  animation-name: wave2;
+  animation-delay: 0.1s;
+}
+
+.wave-menu li:nth-child(3) {
+  animation-name: wave3;
+  animation-delay: 0.15s;
+  animation-duration: 0.45s;
+}
+
+.wave-menu li:nth-child(4) {
+  animation-name: wave4;
+  animation-delay: 0.2s;
+}
+
+.wave-menu li:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.wave-menu li:nth-child(6) {
+  animation-name: wave2;
+  animation-duration: 0.5s;
+}
+
+.wave-menu li:nth-child(7) {
+  animation-name: wave3;
+  animation-delay: 0.3s;
+}
+
+.wave-menu li:nth-child(8) {
+  animation-name: wave4;
+  animation-delay: 0.35s;
+}
+
+.wave-menu li:nth-child(9) {
+  animation-name: wave1;
+  animation-delay: 0.4s;
+}
+
+/* Keyframes cho sóng */
+@keyframes wave1 {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0.4);
+  }
+}
+
+@keyframes wave2 {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(0.7);
+  }
+}
+
+@keyframes wave3 {
+  from {
+    transform: scaleY(0.5);
+  }
+  to {
+    transform: scaleY(0.9);
+  }
+}
+
+@keyframes wave4 {
+  from {
+    transform: scaleY(0.2);
+  }
+  to {
+    transform: scaleY(0.6);
+  }
+}
+
+/* Animations cho tiêu đề và phụ đề */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .slide {
+    height: 400px; /* Giảm chiều cao trên mobile */
+  }
+
+  .slide-title {
+    font-size: 2.2rem;
+  }
+
+  .slide-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .wave-menu {
+    width: 180px; /* Giảm chiều rộng */
+    height: 45px;
+  }
+
+  .wave-menu li {
+    height: 25px; /* Giảm chiều cao sóng */
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    height: 300px;
+  }
+
+  .slide-title {
+    font-size: 1.8rem;
+  }
+
+  .slide-subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .wave-menu {
+    width: 150px;
+    height: 40px;
+  }
+
+  .wave-menu li {
+    height: 20px;
+    margin: 0 4px;
+  }
+}
