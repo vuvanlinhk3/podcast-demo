@@ -6,11 +6,12 @@ const useAudioDownload = (currentPodcast, currentEpisodeIndex, selectedQuality, 
     if (!episode) return;
 
     const qualityParam = qualityOptions[selectedQuality];
-    const downloadUrl = `${episode.audio}?quality=${qualityParam}`;
+    const originalUrl = `${episode.audio}?quality=${qualityParam}`;
+    const proxyUrl = `http://localhost:5000/proxy?url=${encodeURIComponent(originalUrl)}`;
 
     try {
-      const response = await fetch(downloadUrl, { mode: "cors" });
-      if (!response.ok) throw new Error(`Lỗi tải xuống: ${response.status}`);
+      const response = await fetch(proxyUrl, { mode: "cors" });
+      if (!response.ok) throw new Error(`Lỗi tải xuống qua proxy: ${response.status}`);
 
       const blob = await response.blob();
       const objectUrl = URL.createObjectURL(blob);
@@ -29,7 +30,7 @@ const useAudioDownload = (currentPodcast, currentEpisodeIndex, selectedQuality, 
   }, [currentPodcast, currentEpisodeIndex, selectedQuality, qualityOptions]);
 
   return {
-    handleDownload
+    handleDownload,
   };
 };
 

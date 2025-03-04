@@ -227,47 +227,6 @@
     transform: translateX(20px);
   }
   
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 180px;
-    }
-  
-    .main-content {
-      margin-left: 180px;
-    }
-  
-    .audio-player {
-      left: 180px;
-      width: calc(100% - 180px);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: absolute;
-      z-index: 2000;
-      transform: translateX(-100%);
-    }
-  
-    .sidebar.active {
-      transform: translateX(0);
-    }
-  
-    .main-content {
-      margin-left: 0;
-      padding: 10px;
-    }
-  
-    .audio-player {
-      left: 0;
-      width: 100%;
-      padding: 10px;
-    }
-  }
-  
   /* Animation */
   .app-container {
     animation: fadeIn 0.5s ease-in-out;
@@ -285,4 +244,10 @@
   @keyframes slideInLeft {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(0); }
+  }
+  @media (max-width: 500px)  {
+    .main-content{
+      margin-left: 0;
+      margin-top: 50px;
+    }
   }

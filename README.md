@@ -19,35 +19,49 @@ import fetch from "node-fetch";
 import cors from "cors";
 
 const app = express();
-app.use(cors()); // Enable CORS for all origins
+
+// Cấu hình CORS (cho phép localhost trong dev)
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Chỉ cho phép origin từ React app
+  })
+);
 
 app.get("/proxy", async (req, res) => {
   const url = req.query.url;
-  if (!url) {
-    return res.status(400).send("Missing URL parameter");
+
+  // Kiểm tra URL
+  if (!url || typeof url !== "string") {
+    return res.status(400).json({ error: "Thiếu hoặc URL không hợp lệ" });
   }
 
   try {
     const response = await fetch(url, {
+      method: "GET",
       headers: {
-        "User-Agent": "Mozilla/5.0", // Mimic a browser request
-        "Accept": "application/rss+xml, application/xml, text/xml"
-      }
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        Accept: "audio/mpeg, application/octet-stream", // Hỗ trợ tệp âm thanh
+      },
     });
 
     if (!response.ok) {
-      throw new Error(`Server Error (${response.status}): ${response.statusText}`);
+      throw new Error(`Lỗi từ server (${response.status}): ${response.statusText}`);
     }
 
-    const text = await response.text();
-    res.set("Content-Type", "application/xml"); // Set RSS format
-    res.send(text);
+    // Lấy Content-Type từ server gốc
+    const contentType = response.headers.get("Content-Type") || "audio/mpeg";
+    res.set("Content-Type", contentType);
+
+    // Stream dữ liệu âm thanh trực tiếp
+    response.body.pipe(res);
   } catch (err) {
-    res.status(500).send("Error fetching RSS: " + err.message);
+    console.error("Lỗi proxy:", err);
+    res.status(500).json({ error: "Lỗi fetch dữ liệu: " + err.message });
   }
 });
 
-app.listen(5000, () => console.log("✅ Proxy server running on port 5000"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Proxy server running on port ${PORT}`));
 ```
 
 ## 🏃 Running the Server

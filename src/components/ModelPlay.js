@@ -51,9 +51,9 @@ function ModelPlay({ currentPodcast }) {
   return (
     <div className="audio-player">
       <div className="audio-controls">
-        <IconButton onClick={() => skipTime(-10)}><Replay10 /></IconButton>
+        <IconButton className="forward-btn" onClick={() => skipTime(-10)}><Replay10 /></IconButton>
         <IconButton onClick={togglePlay}>{isPlaying ? <Pause /> : <PlayArrow />}</IconButton>
-        <IconButton onClick={() => skipTime(10)}><Forward10 /></IconButton>
+        <IconButton className="rewind-btn" onClick={() => skipTime(10)}><Forward10 /></IconButton>
       </div>
 
       <div className="info-pod">

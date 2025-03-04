@@ -145,7 +145,6 @@ body {
     height: auto;
     position: absolute;
     z-index: 2000;
-    transform: translateX(-100%);
   }
 
   .sidebar.active {
@@ -178,9 +177,6 @@ body {
   }
 }
 
-.sidebar {
-  animation: slideInLeft 0.5s ease-in-out;
-}
 
 @keyframes slideInLeft {
   0% {

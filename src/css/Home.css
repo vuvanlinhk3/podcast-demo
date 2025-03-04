@@ -156,19 +156,42 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .home-title {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Giảm kích thước tiêu đề */
+  }
+
+  .category-section h3 {
+    font-size: 1.5rem; /* Giảm kích thước tiêu đề danh mục */
   }
 
   .podcast-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Giảm kích thước tối thiểu để có ít nhất 2 item */
+    gap: 15px; /* Giảm khoảng cách giữa các item */
   }
 
   .podcast-card {
-    width: 250px; /* Giảm chiều rộng trên mobile */
-    height: 340px; /* Giảm chiều cao trên mobile */
+    width: 180px; /* Giảm chiều rộng trên mobile */
+    height: 240px; /* Giảm chiều cao trên mobile */
   }
 
   .podcast-image {
-    height: 150px; /* Giảm chiều cao hình ảnh */
+    height: 100px; /* Giảm chiều cao hình ảnh */
+  }
+
+  .podcast-info {
+    padding: 10px; /* Giảm padding */
+  }
+
+  .podcast-link {
+    font-size: 1rem; /* Giảm kích thước chữ tiêu đề */
+  }
+
+  .podcast-info p {
+    font-size: 0.8rem; /* Giảm kích thước chữ mô tả */
+    margin: 5px 0; /* Giảm margin */
+  }
+
+  .play-btn {
+    padding: 6px 15px; /* Giảm kích thước nút */
+    font-size: 0.9rem; /* Giảm kích thước chữ nút */
   }
 }

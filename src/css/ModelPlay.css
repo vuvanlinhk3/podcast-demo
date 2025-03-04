@@ -4,11 +4,11 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); /* Gradient sáng nhẹ */
-  color: #2c3e50; /* Màu chữ xanh đậm nhạt */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  color: #2c3e50;
   padding: 15px 20px;
-  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.05); /* Shadow nhẹ */
-  border-top: 1px solid #e0e0e0; /* Viền trên sáng */
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,6 +42,7 @@
 
 .player-info {
   flex-grow: 1;
+  width: 60%;
 }
 
 .player-info h3 {
@@ -50,8 +51,7 @@
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  color: #2c3e50; /* Đồng bộ màu chữ */
+  color: #2c3e50;
 }
 
 /* Progress Bar */
@@ -60,14 +60,14 @@
   align-items: center;
   gap: 10px;
   font-size: 0.9rem;
-  color: #636e72; /* Màu xám nhạt cho thời gian */
+  color: #636e72;
 }
 
 .progress-container {
   position: relative;
   width: 100%;
   height: 6px;
-  background: #dfe4ea; /* Nền sáng cho thanh tiến trình */
+  background: #dfe4ea;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -86,7 +86,7 @@
   -webkit-appearance: none;
   width: 12px;
   height: 12px;
-  background: #0984e3; /* Màu xanh dương thay cho cam */
+  background: #0984e3;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -94,14 +94,14 @@
 .buffered-bar {
   position: absolute;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* Màu xám nhạt cho phần đã buffer */
+  background: rgba(0, 0, 0, 0.1);
   transition: width 0.2s ease-in-out;
 }
 
 .played-bar {
   position: absolute;
   height: 100%;
-  background: #0984e3; /* Màu xanh dương cho phần đã phát */
+  background: #0984e3;
   transition: width 0.2s linear;
 }
 
@@ -116,12 +116,12 @@
 
 .audio-controls .MuiSvgIcon-root {
   font-size: 32px;
-  color: #636e72; /* Màu xám nhạt cho icon */
+  color: #636e72;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .audio-controls .MuiSvgIcon-root:hover {
-  color: #0984e3; /* Màu xanh dương khi hover */
+  color: #0984e3;
   transform: scale(1.1);
 }
 
@@ -142,19 +142,19 @@
 
 .volume-control .MuiSvgIcon-root {
   font-size: 28px;
-  color: #636e72; /* Màu xám nhạt */
+  color: #636e72;
   transition: color 0.3s ease;
 }
 
 .volume-control .MuiSvgIcon-root:hover {
-  color: #0984e3; /* Màu xanh dương khi hover */
+  color: #0984e3;
 }
 
 .volume-control input {
   width: 100px;
   -webkit-appearance: none;
   height: 4px;
-  background: #dfe4ea; /* Nền sáng cho thanh âm lượng */
+  background: #dfe4ea;
   border-radius: 2px;
   outline: none;
   cursor: pointer;
@@ -164,7 +164,7 @@
   -webkit-appearance: none;
   width: 10px;
   height: 10px;
-  background: #0984e3; /* Màu xanh dương */
+  background: #0984e3;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -203,10 +203,10 @@
   position: absolute;
   bottom: 60px;
   right: 0;
-  background: #ffffff; /* Nền trắng cho tùy chọn tải */
+  background: #ffffff;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow nhẹ */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -220,11 +220,11 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  color: #2c3e50; /* Màu chữ tối */
+  color: #2c3e50;
 }
 
 .download-btn {
-  background: #0984e3; /* Màu xanh dương thay cho cam */
+  background: #0984e3;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -235,7 +235,7 @@
 }
 
 .download-btn:hover {
-  background: #0652dd; /* Đậm hơn khi hover */
+  background: #0652dd;
   transform: scale(1.05);
 }
 
@@ -259,44 +259,94 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .audio-player {
+    padding: 10px 15px; /* Giảm padding */
+  }
+
   .info-pod {
-    width: 35%;
+    width: 40%;
+    gap: 10px;
   }
 
-  .audio-controls {
-    width: 35%;
-  }
-
-  .control-volume {
-    width: 30%;
+  .player-image {
+    width: 50px; /* Giảm kích thước ảnh */
+    height: 50px;
   }
 
   .player-info h3 {
-    font-size: 1rem;
+    font-size: 1rem; /* Giảm kích thước chữ */
+  }
+
+  .progress-bar {
+    font-size: 0.8rem; /* Giảm kích thước chữ thời gian */
+  }
+
+  .audio-controls {
+    width: 40%;
+    gap: 10px;
+  }
+
+  .audio-controls .MuiSvgIcon-root {
+    font-size: 28px; /* Giảm kích thước icon */
+  }
+
+  /* Ẩn nút tua lùi và tua tiến */
+  .audio-controls .rewind-btn,
+  .audio-controls .forward-btn {
+    display: none;
+  }
+
+  .control-volume {
+    width: 20%;
   }
 
   .volume-control input {
-    width: 60px;
+    width: 60px; /* Giảm chiều dài thanh âm lượng */
+  }
+
+  .volume-control .MuiSvgIcon-root {
+    font-size: 24px; /* Giảm kích thước icon âm lượng */
   }
 }
 
 @media (max-width: 480px) {
+  .audio-player {
+    padding: 8px 10px; /* Giảm padding hơn nữa */
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu quá chật */
+  }
+
   .info-pod {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .audio-controls {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .control-volume {
-    display: none; /* Ẩn volume trên màn nhỏ */
+    width: 70%; /* Tăng chiều rộng để cân bằng */
+    gap: 8px;
   }
 
   .player-image {
     width: 40px;
     height: 40px;
+  }
+
+  .player-info h3 {
+    font-size: 0.9rem; /* Giảm kích thước chữ thêm */
+  }
+
+  .progress-bar {
+    font-size: 0.7rem; /* Giảm kích thước chữ thời gian */
+  }
+
+  .audio-controls {
+    width: 10%;
+    gap: 8px;
+  }
+
+  .audio-controls .MuiSvgIcon-root {
+    font-size: 24px; /* Giảm kích thước icon thêm */
+  }
+
+  .control-volume {
+    display: none; /* Ẩn volume trên màn nhỏ hơn */
+  }
+
+  .download-icon {
+    font-size: 24px; /* Giảm kích thước icon download */
   }
 }
