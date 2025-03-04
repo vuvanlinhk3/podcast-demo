@@ -7,9 +7,11 @@ import useAudioDownload from "../hooks/useAudioDownload.js";
 
 function ModelPlay({ currentPodcast }) {
   const audioRef = useRef(null);
+  const titleRef = useRef(null); // Ref cho h3
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
   const [selectedQuality, setSelectedQuality] = useState("128kbps");
   const [showQualityOptions, setShowQualityOptions] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false); // Trạng thái vượt chiều rộng
 
   const qualityRef = useRef(selectedQuality);
   const qualityOptions = useMemo(() => ({
@@ -25,6 +27,20 @@ function ModelPlay({ currentPodcast }) {
   useEffect(() => {
     qualityRef.current = selectedQuality;
   }, [selectedQuality]);
+
+  // Kiểm tra chiều rộng của h3
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (titleRef.current) {
+        const isOverflow = titleRef.current.scrollWidth > titleRef.current.clientWidth;
+        setIsOverflowing(isOverflow);
+      }
+    };
+
+    checkOverflow();
+    window.addEventListener("resize", checkOverflow); // Kiểm tra khi resize
+    return () => window.removeEventListener("resize", checkOverflow);
+  }, [currentPodcast, currentEpisodeIndex]);
 
   const nextEpisode = useCallback(() => {
     setCurrentEpisodeIndex((prevIndex) => {
@@ -59,7 +75,9 @@ function ModelPlay({ currentPodcast }) {
       <div className="info-pod">
         <img src={currentPodcast.image} alt={currentPodcast.title} className="player-image" />
         <div className="player-info">
-          <h3>{currentPodcast.title} - {currentPodcast.episodes[currentEpisodeIndex]?.title}</h3>
+          <h3 ref={titleRef} className={isOverflowing ? "marquee" : ""}>
+            {currentPodcast.title} - {currentPodcast.episodes[currentEpisodeIndex]?.title}
+          </h3>
           <audio ref={audioRef} />
           <div className="progress-bar">
             <span>{Math.floor(currentTime / 60)}:{String(Math.floor(currentTime % 60)).padStart(2, "0")}</span>

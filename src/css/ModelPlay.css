@@ -282,7 +282,7 @@
   }
 
   .audio-controls {
-    width: 40%;
+    width: 20%;
     gap: 10px;
   }
 
@@ -348,5 +348,37 @@
 
   .download-icon {
     font-size: 24px; /* Giảm kích thước icon download */
+  }
+}
+/* Trong .player-info */
+.player-info {
+  flex-grow: 1;
+  overflow: hidden; /* Ẩn phần thừa */
+}
+
+/* Thêm style cho h3 với hiệu ứng marquee */
+.player-info h3 {
+  font-size: 1.2rem;
+  margin: 0 0 5px;
+  font-weight: 500;
+  color: #2c3e50;
+  white-space: nowrap; /* Giữ chữ trên một dòng */
+  overflow: hidden; /* Ẩn phần thừa */
+  text-overflow: ellipsis; /* Thêm dấu ... khi không có animation */
+}
+
+/* Khi chữ vượt quá chiều rộng, kích hoạt marquee */
+.player-info h3.marquee {
+  display: inline-block; /* Để animation hoạt động */
+  animation: marquee 10s linear infinite; /* Hiệu ứng chạy ngang */
+}
+
+/* Keyframes cho hiệu ứng marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(10%); /* Bắt đầu từ bên phải */
+  }
+  100% {
+    transform: translateX(-100%); /* Chạy qua bên trái */
   }
 }

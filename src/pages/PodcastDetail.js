@@ -112,7 +112,7 @@ function PodcastDetail({ handlePlayPodcast }) {
             <img src={episode.image} alt={episode.title} className="episode-image" />
             <div className="episode-info">
               <h4>{episode.title}</h4>
-              <p className="episode-description">{episode.description}</p>
+              <p className="episode-description" >{episode.description.replace(/<\/?p>/g, "").trim()}</p>
               <p className="episode-duration">{episode.duration} min</p>
             </div>
           </div>
