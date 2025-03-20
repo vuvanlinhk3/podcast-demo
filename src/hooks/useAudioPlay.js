@@ -18,7 +18,7 @@ const useAudioPlayer = (audioRef, currentPodcast, currentEpisodeIndex, qualityRe
         const episode = currentPodcast.episodes[currentEpisodeIndex];
         if (episode && episode.audio && isFromHome) {
           try {
-            const API_URL = "https://backend-podcast.onrender.com";
+            const API_URL = "https://backend-podcast.onrender.com/api/podcasts";
 
             const response = await fetch(`${API_URL}/proxy?url=${encodeURIComponent(episode.audio)}`);
             const rssText = await response.text();

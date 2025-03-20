@@ -4,7 +4,7 @@ const useAudioDownload = (currentPodcast, currentEpisodeIndex, selectedQuality, 
   const handleDownload = useCallback(async () => {
     const episode = currentPodcast.episodes[currentEpisodeIndex];
     if (!episode) return;
-    const API_URL = "https://backend-podcast.onrender.com";
+    const API_URL = "https://backend-podcast.onrender.com/api/podcasts";
     const qualityParam = qualityOptions[selectedQuality];
     const originalUrl = `${episode.audio}?quality=${qualityParam}`;
     const proxyUrl = `${API_URL}/proxy?url=${encodeURIComponent(originalUrl)}`;
