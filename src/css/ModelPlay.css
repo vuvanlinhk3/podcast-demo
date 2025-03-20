@@ -260,7 +260,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .audio-player {
-    padding: 10px 15px; /* Giảm padding */
+    padding: 10px 15px; 
   }
 
   .info-pod {
@@ -269,16 +269,16 @@
   }
 
   .player-image {
-    width: 50px; /* Giảm kích thước ảnh */
+    width: 50px; 
     height: 50px;
   }
 
   .player-info h3 {
-    font-size: 1rem; /* Giảm kích thước chữ */
+    font-size: 1rem; 
   }
 
   .progress-bar {
-    font-size: 0.8rem; /* Giảm kích thước chữ thời gian */
+    font-size: 0.8rem; 
   }
 
   .audio-controls {
@@ -287,7 +287,7 @@
   }
 
   .audio-controls .MuiSvgIcon-root {
-    font-size: 28px; /* Giảm kích thước icon */
+    font-size: 28px; 
   }
 
   /* Ẩn nút tua lùi và tua tiến */
@@ -301,22 +301,22 @@
   }
 
   .volume-control input {
-    width: 60px; /* Giảm chiều dài thanh âm lượng */
+    width: 60px; 
   }
 
   .volume-control .MuiSvgIcon-root {
-    font-size: 24px; /* Giảm kích thước icon âm lượng */
+    font-size: 24px; 
   }
 }
 
 @media (max-width: 480px) {
   .audio-player {
-    padding: 8px 10px; /* Giảm padding hơn nữa */
-    flex-wrap: wrap; /* Cho phép xuống dòng nếu quá chật */
+    padding: 8px 10px; 
+    flex-wrap: wrap; 
   }
 
   .info-pod {
-    width: 70%; /* Tăng chiều rộng để cân bằng */
+    width: 70%; 
     gap: 8px;
   }
 
@@ -326,11 +326,11 @@
   }
 
   .player-info h3 {
-    font-size: 0.9rem; /* Giảm kích thước chữ thêm */
+    font-size: 0.9rem; 
   }
 
   .progress-bar {
-    font-size: 0.7rem; /* Giảm kích thước chữ thời gian */
+    font-size: 0.7rem; 
   }
 
   .audio-controls {
@@ -339,21 +339,21 @@
   }
 
   .audio-controls .MuiSvgIcon-root {
-    font-size: 24px; /* Giảm kích thước icon thêm */
+    font-size: 24px; 
   }
 
   .control-volume {
-    display: none; /* Ẩn volume trên màn nhỏ hơn */
+    display: none; 
   }
 
   .download-icon {
-    font-size: 24px; /* Giảm kích thước icon download */
+    font-size: 24px; 
   }
 }
 /* Trong .player-info */
 .player-info {
   flex-grow: 1;
-  overflow: hidden; /* Ẩn phần thừa */
+  overflow: hidden;
 }
 
 /* Thêm style cho h3 với hiệu ứng marquee */
@@ -362,23 +362,22 @@
   margin: 0 0 5px;
   font-weight: 500;
   color: #2c3e50;
-  white-space: nowrap; /* Giữ chữ trên một dòng */
-  overflow: hidden; /* Ẩn phần thừa */
-  text-overflow: ellipsis; /* Thêm dấu ... khi không có animation */
+  white-space: nowrap; 
+  overflow: hidden; 
+  /* text-overflow: ellipsis;  */
 }
 
-/* Khi chữ vượt quá chiều rộng, kích hoạt marquee */
 .player-info h3.marquee {
-  display: inline-block; /* Để animation hoạt động */
-  animation: marquee 10s linear infinite; /* Hiệu ứng chạy ngang */
+  display: inline-block;
+  animation: marquee 10s linear infinite; 
 }
 
 /* Keyframes cho hiệu ứng marquee */
 @keyframes marquee {
   0% {
-    transform: translateX(10%); /* Bắt đầu từ bên phải */
+    transform: translateX(10%); 
   }
   100% {
-    transform: translateX(-100%); /* Chạy qua bên trái */
+    transform: translateX(-100%); 
   }
 }

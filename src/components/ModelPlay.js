@@ -32,23 +32,30 @@ function ModelPlay({ currentPodcast }) {
   useEffect(() => {
     const checkOverflow = () => {
       if (titleRef.current) {
-        const isOverflow = titleRef.current.scrollWidth > titleRef.current.clientWidth;
+        const isOverflow = titleRef.current.scrollWidth >= titleRef.current.clientWidth;
         setIsOverflowing(isOverflow);
+        console.log("Overflow checked:", isOverflow);
       }
     };
-
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow); // Kiểm tra khi resize
+  
+    checkOverflow(); // Kiểm tra ngay khi render
+    window.addEventListener("resize", checkOverflow);
+  
     return () => window.removeEventListener("resize", checkOverflow);
   }, [currentPodcast, currentEpisodeIndex]);
 
-  const nextEpisode = useCallback(() => {
-    setCurrentEpisodeIndex((prevIndex) => {
-      if (!currentPodcast) return prevIndex;
-      const nextIndex = prevIndex + 1;
-      return nextIndex < currentPodcast.episodes.length ? nextIndex : prevIndex;
-    });
-  }, [currentPodcast]);
+
+
+
+
+const nextEpisode = useCallback(() => {
+  setCurrentEpisodeIndex((prevIndex) => {
+    if (!currentPodcast || !currentPodcast.episodes) return prevIndex;
+    const nextIndex = prevIndex + 1;
+    return nextIndex < currentPodcast.episodes.length ? nextIndex : prevIndex;
+  });
+}, [currentPodcast]);
+
 
   const {
     isPlaying,
@@ -75,9 +82,10 @@ function ModelPlay({ currentPodcast }) {
       <div className="info-pod">
         <img src={currentPodcast.image} alt={currentPodcast.title} className="player-image" />
         <div className="player-info">
-          <h3 ref={titleRef} className={isOverflowing ? "marquee" : ""}>
-            {currentPodcast.title} - {currentPodcast.episodes[currentEpisodeIndex]?.title}
-          </h3>
+        <h3 ref={titleRef} className={`podcast-title ${isOverflowing ? "marquee" : ""}`}>
+            {currentPodcast?.title} - {currentPodcast?.episodes[currentEpisodeIndex]?.title}
+        </h3>
+
           <audio ref={audioRef} />
           <div className="progress-bar">
             <span>{Math.floor(currentTime / 60)}:{String(Math.floor(currentTime % 60)).padStart(2, "0")}</span>
